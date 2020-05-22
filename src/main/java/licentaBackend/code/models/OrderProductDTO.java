@@ -25,4 +25,11 @@ public class OrderProductDTO implements Serializable {
     }
 
 
+    @Override
+    public String toString() {
+        return "OrderProductDTO{" +
+                "product=" + product +
+                ", quantity=" + quantity +
+                '}';
+    }
 }

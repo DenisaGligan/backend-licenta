@@ -15,6 +15,9 @@ public interface OrderService {
     Order create(@NotNull(message = "The order cannot be null.") @Valid Order order);
 
     void update(@NotNull(message = "The order cannot be null.") @Valid Order order);
+    Order updateStatus(Long id,Order order) throws Exception;
+
+    Boolean verifyStatus(Order o);
 
     List<Order> getOrdersByUserId(Long id);
 

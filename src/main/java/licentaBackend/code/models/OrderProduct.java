@@ -86,4 +86,12 @@ public class OrderProduct implements Serializable {
 
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "OrderProduct{" +
+                "pk=" + pk +
+                ", quantity=" + quantity +
+                '}';
+    }
 }
