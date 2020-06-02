@@ -49,7 +49,7 @@ public class OrderController {
 
         try {
             List<Order> userOrder = orderService.getOrdersByUserId(id);
-            System.out.println("Dimensiune:" + userOrder.size());
+
             return  new ResponseEntity<>(userOrder, HttpStatus.OK);
         }
         catch(Exception e) {
