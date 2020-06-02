@@ -87,7 +87,14 @@ public class OrderProductPK implements Serializable {
         } else if (!product.equals(other.product)) {
             return false;
         }
-
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderProductPK{" +
+                "order=" + order +
+                ", product=" + product +
+                '}';
     }
 }

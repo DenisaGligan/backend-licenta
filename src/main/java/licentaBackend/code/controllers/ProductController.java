@@ -84,13 +84,13 @@ public class ProductController {
         }
     }
 
-   /* //get products by type or name
-    @GetMapping("/products/filter")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<List<Product>> findByTypeOrName(@RequestBody DTO dto){
+    //get products by type
+    @GetMapping("/productsby/{type}")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<List<Product>> findByType(@PathVariable("type") String type){
 
         try{
-            List<Product> productsType= productService.getProductsByNameOrType(dto);
+            List<Product> productsType= productService.getAllByType(type);
 
             if(productsType.isEmpty()){
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -116,7 +116,7 @@ public class ProductController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
- */
+
 
     //get product by id
     @GetMapping("/products/{id}")

@@ -1,6 +1,8 @@
 package licentaBackend.code.Security.Services;
 
 import licentaBackend.code.models.Order;
+import licentaBackend.code.models.OrderStatus;
+import licentaBackend.code.models.Product;
 import licentaBackend.code.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,6 +40,26 @@ public class OrderServiceImpl implements OrderService {
         this.orderRepository.save(order);
     }
 
+    public Boolean verifyStatus(Order o){
+
+        if(o.getStatus().equals(OrderStatus.HONOR.name())){
+
+            return true;
+        }
+        return false;
+    }
+
+    public Order updateStatus(Long id, Order order) throws Exception{
+
+        Optional<Order> productData = orderRepository.findById(id);
+        if(productData.isPresent()) {
+            Order _order = productData.get();
+            _order.setStatus(OrderStatus.HONOR.name());
+            orderRepository.save(_order);
+            return _order;
+        }
+        else { throw new Exception("not found");}
+    }
 
     public List<Order> getOrdersByUserId(Long id){
 

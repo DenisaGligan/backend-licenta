@@ -7,6 +7,7 @@ import licentaBackend.code.Security.Services.OrderService;
 import licentaBackend.code.Security.Services.ProductService;
 import licentaBackend.code.Security.Services.UserDetailsServiceImpl;
 import licentaBackend.code.models.*;
+import licentaBackend.code.payload.response.MessageResponse;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +38,7 @@ public class OrderController {
     }
 
     @GetMapping
-    @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasRole('ADMIN')")
     public @NotNull List<Order> getAllOrders(){
         return this.orderService.getAllOrders();
     }
@@ -48,7 +49,7 @@ public class OrderController {
 
         try {
             List<Order> userOrder = orderService.getOrdersByUserId(id);
-            System.out.println("Dimensiune:" + userOrder.size());
+
             return  new ResponseEntity<>(userOrder, HttpStatus.OK);
         }
         catch(Exception e) {
@@ -57,6 +58,24 @@ public class OrderController {
         }
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateStatus(@PathVariable("id") Long id,@RequestBody Order o){
+
+        if(orderService.verifyStatus(o)){
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse(" The order is already honored"));
+        }
+
+        try{
+            Order _order = orderService.updateStatus(id,o);
+            return new ResponseEntity<>(_order,HttpStatus.OK);
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
     @PostMapping
     public ResponseEntity<Order> create(@RequestBody OrderForm form){
@@ -72,7 +91,7 @@ public class OrderController {
 
 
         Order order = new Order();
-        order.setStatus(OrderStatus.PAID.name());
+        order.setStatus(OrderStatus.PROCESSING.name());
 
         order.setAdress(form.getAdress());
         order.setTelephone(form.getTelephone());

@@ -108,4 +108,17 @@ public class Order implements Serializable {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", user=" + user +
+                ", dateCreated=" + dateCreated +
+                ", status='" + status + '\'' +
+                ", orderProducts=" + orderProducts +
+                ", adress='" + adress + '\'' +
+                ", telephone='" + telephone + '\'' +
+                '}';
+    }
 }
