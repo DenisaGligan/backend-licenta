@@ -26,14 +26,17 @@ public class Product {
 
     private String imgUrl;
 
+    private String description;
+
     public Product() {
     }
 
-    public Product(@NotBlank @Size(max = 20) String type, @NotBlank @Size(max = 20) String name, Integer price, String imgUrl) {
+    public Product(@NotBlank @Size(max = 20) String type, @NotBlank @Size(max = 20) String name, Integer price, String imgUrl, String desc) {
         this.type = type;
         this.name = name;
         this.price = price;
         this.imgUrl = imgUrl;
+        this.description = desc;
     }
 
     public Long getId() {
@@ -73,6 +76,16 @@ public class Product {
         this.imgUrl = imgUrl;
     }
 
+
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -81,6 +94,7 @@ public class Product {
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", imgUrl='" + imgUrl + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

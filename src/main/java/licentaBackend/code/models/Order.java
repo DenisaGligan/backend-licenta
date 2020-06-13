@@ -34,7 +34,7 @@ public class Order implements Serializable {
     @Valid
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<OrderProduct> orderProducts = new ArrayList<>();
-    private String adress;
+    private String address;
     private String telephone;
 
     @Transient
@@ -93,12 +93,12 @@ public class Order implements Serializable {
         this.user = user;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getTelephone() {
@@ -117,7 +117,7 @@ public class Order implements Serializable {
                 ", dateCreated=" + dateCreated +
                 ", status='" + status + '\'' +
                 ", orderProducts=" + orderProducts +
-                ", adress='" + adress + '\'' +
+                ", address='" + address + '\'' +
                 ", telephone='" + telephone + '\'' +
                 '}';
     }

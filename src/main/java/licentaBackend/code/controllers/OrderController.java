@@ -93,7 +93,7 @@ public class OrderController {
         Order order = new Order();
         order.setStatus(OrderStatus.PROCESSING.name());
 
-        order.setAdress(form.getAdress());
+        order.setAddress(form.getAdress());
         order.setTelephone(form.getTelephone());
 
         order.setUser(user);

@@ -42,7 +42,7 @@ public class OrderServiceImpl implements OrderService {
 
     public Boolean verifyStatus(Order o){
 
-        if(o.getStatus().equals(OrderStatus.HONOR.name())){
+        if(o.getStatus().equals(OrderStatus.HONORED.name())){
 
             return true;
         }
@@ -54,7 +54,7 @@ public class OrderServiceImpl implements OrderService {
         Optional<Order> productData = orderRepository.findById(id);
         if(productData.isPresent()) {
             Order _order = productData.get();
-            _order.setStatus(OrderStatus.HONOR.name());
+            _order.setStatus(OrderStatus.HONORED.name());
             orderRepository.save(_order);
             return _order;
         }

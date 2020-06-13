@@ -106,7 +106,7 @@ public class ProductService {
      //create product
     public Product createProduct(Product product)
     {
-            Product _product = productRepository.save(new Product(product.getType(), product.getName(), product.getPrice(), product.getImgUrl()));
+            Product _product = productRepository.save(new Product(product.getType(), product.getName(), product.getPrice(), product.getImgUrl(), product.getDescription()));
             return _product;
     }
 
@@ -118,6 +118,7 @@ public class ProductService {
             Product _product = productData.get();
             _product.setPrice(p.getPrice());
             _product.setImgUrl(p.getImgUrl());
+            _product.setDescription(p.getDescription());
             productRepository.save(_product);
             return _product;
         }
